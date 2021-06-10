@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+<script type="text/javascript" th:src="@{/myScript.js}"></script>
+
+</head>
+<body>
+	<div class="container">
+		<div class="logo">
+			<p>
+				<img class="mx-auto d-block"
+					alt="logo des Bibliothèques de Katzenheim"
+					src="/imagesAndLogos/logos/logo.png">
+			</p>
+		</div>
+	</div>
+
+	<nav class="navbar navbar-expand-sm navbar-custom py-4"
+		id="navbar_menu">
+		<ul class="navbar-nav">
+			<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="/aProposDesBiblio">A Propos des Bibliothèques </a></li>
+			<li class="dropdown">
+				<button type="button" class="btn btn-primary dropdown-toggle"
+					data-toggle="dropdown">Les livres</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="/listeDesLivres">La
+						liste des livres</a> 
+					<a class="dropdown-item" sec:authorize="isAuthenticated()" href="/ajouterDesLivres">Ajouter des Livres</a>
+				</div>
+			</li>
+		
+
+
+			<li class="nav-item" sec:authorize="isAnonymous()"><a
+				class="nav-link" href="/seConnecter"> Mon Compte 
+			</a></li>
+
+
+
+			<li class="dropdown" sec:authorize="hasRole('ADMIN')">
+				<button type="button" class="btn btn-primary dropdown-toggle"
+					data-toggle="dropdown">Fonctionnalités ADMIN</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="/listeDesUsers">Liste des
+						Utilisateurs</a> <a class="dropdown-item" href="/editRole">Editer
+						les roles</a>
+				</div>
+			</li>
+
+			<li class="dropdown" sec:authorize="isAuthenticated()">
+				<button type="button" class="btn btn-primary dropdown-toggle"
+					data-toggle="dropdown">
+					Mon Compte
+				</button>
+				<div class="dropdown-menu">
+					<a class="nav-link" href="/monCompte">Mon Compte</a> <a
+						class="dropdown-item" th:href="@{/logout}">Sign Out</a>
+				</div>
+			</li>
+		</ul>
+		<a class="navbar-brand" href="#" sec:authorize="isAnonymous()"> <img
+			class="img-fluid" alt="Mon Compte"
+			src="/imagesAndLogos/logos/monCompte.png">
+		</a> <a class="navbar-brand" href="#" sec:authorize="isAuthenticated()">
+			<img class="img-fluid" alt="logo isAuth"
+			src="/imagesAndLogos/logos/isAuth.png">
+		</a>
+
+	</nav>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Les Bibliothèques de Katzenheim</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="bloc_page">
+		<header>
+			<div class="header_top_part">
+				<div th:insert="menu.html"></div>
+			</div>
+			<div class="header_midle_part">
+				<div class="image_holder">
+					<img class="img-fluid mx-auto d-block"
+						alt="un logo graphique"
+						src="\imagesAndLogos\images\KatzenheilGraphique.png">
+				</div>
+			</div>
+			<div class="header_bottom_part">
+				<h1>NEWS</h1>
+			</div>
+		</header>
+
+		<div class="row" id=home_articles_setion>
+
+			<div class="col-sm-4">
+				<img class="img-fluid" width="500" height="400"
+					src="\imagesAndLogos\images\groupe.jpg" alt="groupe.jpg">
+			</div>
+			<div class="col-sm-6" id="text_article">
+				<h2>Les grandes vacances approchent, pensez aux journées lecture !</h2>
+				<p>Pendant les grandes vacances les bibliothèques restent ouvertes et différents ateliers sont organisés. N'hésitez pas à vous inscrire...</p>
+			</div>
+
+
+			<div class="col-sm-4">
+				<img class="img-fluid" width="500" height="400"
+					src="\imagesAndLogos\images\plantes.jpg" alt="plantes.jpg">
+			</div>
+			<div class="col-sm-6" id="text_article">
+				<h2>Les plantes dans la litérature, avec conférence spéciale de Jean-Marie Pelt </h2>
+				<p>Les plantes et leurs vertu s sont très présentes dans la litérature, quelque soit l'époque. Jardin, médecine, alchimie, vie elles sont partout.De nos jours on assiste à une remise au goût du jour de la médecine par les plantes. Jean-Marie Pelt a été un des pionniers de ce renouveau.  A l'occasion de la sortie de son nouveau livre "Les légumes, ces héros silencieux" celui ci tiendra une conférence le 13.07.21 à 19h à Katzenheim Nord salle Main-Coon, suivit d'un débat, puis d'une séance de vente/dédicace. Attention préinscriptions nécessaires en raison des conditions sanitaires. Evenement limité à 150 personnes. </p>
+			</div>
+
+
+
+			<div class="col-sm-4">
+				<img class="img-fluid" width="500" height="400"
+					src="\imagesAndLogos\images\informatique.jpg" alt="informatique.jpg">
+			</div>
+			<div class="col-sm-6 " id="text_article">
+				<h2>Les ateliers numériques reprise</h2>
+				<p>Nous avons le plaisir de vous annoncer la reprise des ateliers numériques. Au programme Ateliers : labo photo, remise à niveau informatique adulte, labo de langue et bien d'autres... Pour plus d'information n'hésitez pas à nous contacter! </p>
+			</div>
+
+
+			<div class="col-sm-4">
+				<img class="img-fluid" width="500" height="400"
+					src="\imagesAndLogos\images\contes.jpg"
+					alt="contes.jpg">
+			</div>
+			<div class="col-sm-6" id="text_article">
+				<h2>""Contes et légendes" atelier contes de nos régions (de 6 à 12 ans)</h2>
+				<p> Les dimanches 6 et 13 juin à 16h salle Persan, la conteuse Pandaline vous fera rever avec des légendes de notre région comme "l'histoire de la fée Mélusine", "le Graouli", ou encore "le renard de Morlange"... En raison de la crise sanitaire l'atelier est limité à 20 enfants + un adulte accompagnant par enfant maximum. Merci de votre compréhension. Les pré-inscription pour l'évenement sont ouvertes jusqu'au 4 juin. Pour tout renseignement n'hesitez pas à nous contacter. </p>
+			</div>
+
+		</div>
+
+
+	</div>
+	<footer>
+		<div th:insert="footer.html"></div>
+	</footer>
+
+</body>
+</html>
