@@ -36,31 +36,31 @@ public class Stock implements Serializable {/**
 	private Integer id;
 	
 	@Column(name="NUMBER_AVAILABLE")
-	@Min(value=0, message="doit ête compris entre 1 et 10")
-	@Max(value=10, message="doit ête compris entre 1 et 10")
-	@NotNull(message="Ce champ ne doit pas être vide")
-	private int numberOfCopyAvailable;
+//	@Min(value=0, message="doit ête compris entre 1 et 10")
+//	@Max(value=10, message="doit ête compris entre 1 et 10")
+//	@NotNull(message="Ce champ ne doit pas être vide")
+	private int numberOfCopiesAvailable;
 	
 	@Column(name="NUMBER_OUT")
-	@Min(value=0, message="doit ête compris entre 1 et 10")
-	@Max(value=10, message="doit ête compris entre 1 et 10")
-	@NotNull(message="Ce champ ne doit pas être vide")
-	private int numberOfCopyOut;
+//	@Min(value=0, message="doit ête compris entre 1 et 10")
+//	@Max(value=10, message="doit ête compris entre 1 et 10")
+//	@NotNull(message="Ce champ ne doit pas être vide")
+	private int numberOfCopiesOut;
 	
 	@Column(name="TOTAL_COPIES")
-	@Min(value=0, message="doit ête compris entre 1 et 10")
-	@Max(value=10, message="doit ête compris entre 1 et 10")
-	@NotNull(message="Ce champ ne doit pas être vide")
-	private int totalOfCopy;
+//	@Min(value=0, message="doit ête compris entre 1 et 10")
+//	@Max(value=99, message="doit ête compris entre 1 et 10")
+//	@NotNull(message="Ce champ ne doit pas être vide")
+	private int totalOfCopies;
 
 	public Stock(
-			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") int numberOfCopyAvailable,
-			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") int numberOfCopyOut,
-			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") int totalOfCopy) {
+			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") int numberOfCopiesAvailable,
+			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") int numberOfCopiesOut,
+			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") int totalOfCopies) {
 		super();
-		this.numberOfCopyAvailable = numberOfCopyAvailable;
-		this.numberOfCopyOut = numberOfCopyOut;
-		this.totalOfCopy = totalOfCopy;
+		this.numberOfCopiesAvailable = totalOfCopies-numberOfCopiesOut;
+		this.numberOfCopiesOut = numberOfCopiesOut;
+		this.totalOfCopies = totalOfCopies;
 	}
 	
 	

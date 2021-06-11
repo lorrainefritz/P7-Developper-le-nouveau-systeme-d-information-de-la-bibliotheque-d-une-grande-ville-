@@ -22,6 +22,20 @@ public List<Library> getAllLibraries(){
 	return libraryRepository.findAll();
 }
 
-	
-	
+public Library getOneLibraryById(Integer id) {
+	logger.info("in LibraryService in getOneLibraryById method");
+	return libraryRepository.getById(id);
+}
+
+public Library saveLibrary(Library library) {
+	logger.info("in LibraryService in saveLibrary method");
+	return libraryRepository.save(library);
+}
+
+public void deleteLibrary(Library library) {
+	logger.info("in LibraryService in deleteLibrary method");
+	libraryRepository.delete(library);
+}
+
+
 }

@@ -25,10 +25,17 @@ public class BookService {
 		return bookRepository.findAll();
 	}
 	
+	public List<Book> getBooksByKeyword(String keyword){
+		logger.info("in BookService in getBooksByKeyword method");
+		return bookRepository.findByKeyword(keyword);
+	}
+	
 	public Book getOneBookById(Integer id) {
 		logger.info("in BookService in getOneBookById method");
 		return bookRepository.getById(id);
 	}
+	
+
 	public Book getOneBookByTitle(String title) {
 		logger.info("in BookService in getOneBookByTitle method");
 		return  bookRepository.findByTitle(title);
