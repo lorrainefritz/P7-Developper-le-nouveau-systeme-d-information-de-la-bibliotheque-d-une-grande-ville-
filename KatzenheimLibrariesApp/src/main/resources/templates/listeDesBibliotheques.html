@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Les Bibliothèques de Katzenheim</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="bloc_page">
+		<header>
+			<div class="header_top_part">
+				<div th:insert="menu.html"></div>
+			</div>
+			<div class="header_bottom_part">
+				<h1>LISTE DES BIBLIOTHEQUES</h1>
+			</div>
+		</header>
+		<div class="row" id="blocPageLibrariesList"
+			th:each="library:${libraries}">
+
+			<div class="col-sm-4" id=descriptionLibrariesList>
+
+				<h3 th:text="${library.name}">NOM</h3>
+				<div th:text="${library.address}">ADRESSE</div>
+				<div th:text="${library.email}">EMAIL</div>
+				<div th:text="${library.phone}">TELEPHONE</div>
+
+			</div>
+			<!-- A rajouter sec:authorize="hasAnyRole('ADMIN')" -->
+			<div>
+				<a class="btn btn-warning btn-lg"
+					th:href="@{modifierUneBibliotheque(id=${library.id})}">
+					Modifier</a>
+			</div>
+			<!-- A rajouter sec:authorize="hasAnyRole('ADMIN')" -->
+			<div>
+				<a class="btn btn-dark btn-lg" id="buttonSuppressionLibrary"
+					th:href="@{supprimerUneBibliotheque(id=${library.id})}"
+					onclick="return confirm('êtes vous sur de vouloir supprimer?')">Supprimer</a>
+			</div>
+
+		</div>
+		<footer>
+			<div th:insert="footer.html"></div>
+		</footer>
+	</div>
+</body>
+</html>

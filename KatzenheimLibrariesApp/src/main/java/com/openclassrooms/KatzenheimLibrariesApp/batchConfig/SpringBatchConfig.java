@@ -16,32 +16,32 @@ import org.springframework.context.annotation.Configuration;
 
 import com.openclassrooms.KatzenheimLibrariesApp.entities.LibraryUser;
 
-@Configuration
-@EnableBatchProcessing
+//@Configuration
+//@EnableBatchProcessing
 public class SpringBatchConfig {
 
-	@Autowired private JobBuilderFactory jobBuilderFactory;
-	@Autowired private StepBuilderFactory stepBuilderFactory;
-	@Autowired private ItemReader <LibraryUser> itemReader;
-	@Autowired private ItemWriter <LibraryUser> itemWriter;
-	@Autowired private ItemProcessor<LibraryUser,LibraryUser> itemProcessor;
-	
-	@Bean
-	public Job job() {
-		
-		Step step = stepBuilderFactory.get("step-load-data")
-				.<LibraryUser,LibraryUser> chunk(100)
-				.reader(itemReader)
-				.writer(itemWriter)
-				.processor(itemProcessor)
-				.build();
-				;
-				
-	return jobBuilderFactory.get("ETL-Load")
-			.incrementer(new RunIdIncrementer())
-			.start(step)
-			.build();
-		
-	}
+//	@Autowired private JobBuilderFactory jobBuilderFactory;
+//	@Autowired private StepBuilderFactory stepBuilderFactory;
+//	@Autowired private ItemReader <LibraryUser> itemReader;
+//	@Autowired private ItemWriter <LibraryUser> itemWriter;
+//	@Autowired private ItemProcessor<LibraryUser,LibraryUser> itemProcessor;
+//	
+//	@Bean
+//	public Job job() {
+//		
+//		Step step = stepBuilderFactory.get("step-load-data")
+//				.<LibraryUser,LibraryUser> chunk(100)
+//				.reader(itemReader)
+//				.writer(itemWriter)
+//				.processor(itemProcessor)
+//				.build();
+//				;
+//				
+//	return jobBuilderFactory.get("ETL-Load")
+//			.incrementer(new RunIdIncrementer())
+//			.start(step)
+//			.build();
+//		
+//	}
 	
 }

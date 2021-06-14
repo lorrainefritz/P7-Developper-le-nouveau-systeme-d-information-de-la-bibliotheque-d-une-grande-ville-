@@ -23,7 +23,17 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()	
 			.authorizeRequests()
 				.antMatchers(
-					"/"
+					"/",
+					"listeDesBibliotheques",
+					"listeDesLivres",
+					//prévoir de passer ça en admin
+					"ajouterUneBibliotheque",
+					"modifierUneBibliotheque",
+					"supprimerUneBibliotheque",
+					"ajouterDesLivres",
+					"modifierUnLivre",
+					"supprimerUnLivre"
+					
 					).permitAll();
 	}
 

@@ -1,0 +1,172 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Les Amis de L'escalade</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<div class="bloc_page">
+		<header>
+			<div class="header_top_part">
+				<div th:insert="menu.html"></div>
+			</div>
+			<div class="header_bottom_part">
+				<h1>AJOUTER DES LIVRES</h1>
+			</div>
+		</header>
+		<div class="page_formulaire">
+			<div class="container-fluid pt-3">
+				<form th:action="@{/ajouterDesLivres}" th:object="${book}"
+					method="post" class="formulaire" name="formulaire">
+
+					<div class="col-lg-8 form-group">
+						<input type="hidden" id="id" class="form-control" th:field="*{id}">
+					</div>
+
+					<div class="col-lg-8 form-group">
+						<label for="title">TITRE DU LIVRE</label> <input
+							th:field="*{title}" type="text" class="form_label" id="titleBook"
+							name="title" placeholder="Obligatoire">
+						<div class="element_danger">
+							<div id="errorTitleBook"></div>
+							<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+						</div>
+					</div>
+
+					<div class="col-lg-8 form-group">
+						<label for="author">AUTEUR</label> <input th:field="*{author}"
+							type="text" class="form_label" id="authorBook" name="author"
+							placeholder="Obligatoire">
+						<div class="element_danger">
+							<div id="errorAuthorBook"></div>
+							<div th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></div>
+						</div>
+					</div>
+
+					<div class="col-lg-8 form-group">
+						<label for="language">LANGUE</label> <input th:field="*{language}"
+							type="text" class="form_label" id="languageBook" name="language"
+							placeholder="Obligatoire">
+						<div class="element_danger">
+							<div id="errorLanguageBook"></div>
+							<div th:if="${#fields.hasErrors('language')}"
+								th:errors="*{language}"></div>
+						</div>
+					</div>
+
+
+					<div class="col-lg-8 form-group">
+						<label for="type">GENRE</label> <input th:field="*{type}"
+							type="text" class="form_label" id="typeBook" name="type"
+							placeholder="Obligatoire">
+						<div class="element_danger">
+							<div id="errorTypeBook"></div>
+							<div th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></div>
+						</div>
+					</div>
+
+
+					<div class="col-lg-8 form-group">
+						<label for="summary">RESUME</label> <input th:field="*{summary}"
+							type="text" class="form_label" id="summaryBook" name="summary"
+							placeholder="Obligatoire">
+						<div class="element_danger">
+							<div id="errorSummaryBook"></div>
+							<div th:if="${#fields.hasErrors('summary')}"
+								th:errors="*{summary}"></div>
+						</div>
+					</div>
+
+					<div class="col-lg-8 form-group">
+						<label for="publisher">EDITEUR</label> <input
+							th:field="*{publisher}" type="text" class="form_label"
+							id="publisherBook" name="publisher" placeholder="Obligatoire">
+						<div class="element_danger">
+							<div id="errorPublisherBook"></div>
+							<div th:if="${#fields.hasErrors('publisher')}"
+								th:errors="*{publisher}"></div>
+						</div>
+					</div>
+
+
+					<div class="col-lg-8 form-group">
+						<label for="creationDate">DATE D'EDITION</label> <input
+							th:field="*{creationDate}" type="date" class="form_label"
+							id="creationDateBook" name="creationDate"
+							placeholder="Obligatoire">
+						<div class="element_danger">
+							<div id="errorCreationDateBook"></div>
+							<div th:if="${#fields.hasErrors('creationDate')}"
+								th:errors="*{creationDate}"></div>
+						</div>
+					</div>
+
+					<div class="col-lg-8 form-group">
+						<label for="shelve">REFERENCEMENT</label> <input
+							th:field="*{shelve}" type="text" class="form_label"
+							id="shelveBook" name="shelve" placeholder="Obligatoire">
+						<div class="element_danger">
+							<div id="errorShelveBook"></div>
+							<div th:if="${#fields.hasErrors('shelve')}" th:errors="*{shelve}"></div>
+						</div>
+					</div>
+
+
+
+					<div class="col-lg-8 form-group" th:object="${stock}">
+						<!-- <input type="hidden" id="id" class="form-control" th:field="*{id}"> -->
+
+						<label for="totalOfCopies">NOMBRE DE COPIES</label> <input
+							th:field="*{totalOfCopies}" type="text" class="form_label"
+							id="totalOfCopiesStock" name="totalOfCopies" placeholder="1-10">
+						<div class="element_danger">
+							<div id="errortotalOfCopiesStock"></div>
+							<div th:if="${#fields.hasErrors('totalOfCopies')}"
+								th:errors="*{totalOfCopies}"></div>
+						</div>
+					</div>
+
+					
+					<div class="col-lg-8 form-group" th:object="${lib}">
+						<label for="name">BIBLIOTHEQUES</label>
+						<div>
+							<select th:field="*{name}">
+								<option th:each="library : ${libraries}" th:text="${library.name}"
+									th:value="${library.name}">
+							</select>
+						</div>
+					</div>
+
+
+
+
+
+
+
+					<!-- <div  th:object="${lib}">
+						<select th:object="${libraries}">
+							<option th:each="library:${libraries}" th:text="${library.name}" th:value="library.id"></option>
+						</select>
+					</div> -->
+
+
+					<div class="col-lg-8 form-group">
+						<button type="submit" class="btn btn-primary" id="btn_form_submit"
+							onclick="validateBook()">Soumettre</button>
+					</div>
+					<div class="col-lg-8 form-group">
+						<button type="button" class="btn btn-primary" id="btn_form_test"
+							onclick="validateBook()">TESTING JS</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<footer>
+			<div th:insert="footer.html"></div>
+		</footer>
+	</div>
+</body>
+</html>

@@ -48,10 +48,16 @@ public class Book {
 	@NotBlank(message="Ce champ ne doit pas être vide")
 	private String author;
 	
+	@Column(name="TYPE")
+	@Size(max=65, message="65 charactères maximum")
+	@NotBlank(message="Ce champ ne doit pas être vide")
+	private String type;
+	
 	@Column(name="SUMMARY")
 	@Size(max=65, message="65 charactères maximum")
 	@NotBlank(message="Ce champ ne doit pas être vide")
 	private String summary;
+	
 	
 	@Column(name="PUBLISHER")
 	@Size(max=65, message="65 charactères maximum")
@@ -63,9 +69,15 @@ public class Book {
 	@NotBlank(message="Ce champ ne doit pas être vide")
 	private String language;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="SHELVE")
+	@Size(max=65, message="65 charactères maximum")
+	@NotBlank(message="Ce champ ne doit pas être vide")
+	private String shelve;
+	
+	
+	
 	@Column(name="CREATION_DATE")
-	private Date creationDate;
+	private String creationDate;
 	
 	@Lob
 	@Column (name = "COVER", length= Integer.MAX_VALUE, nullable= true)
@@ -94,7 +106,7 @@ public class Book {
 			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") String summary,
 			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") String publisher,
 			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") String language,
-			Date creationDate, String cover, Library library, Stock stock) {
+			String creationDate, String cover, Library library, Stock stock) {
 		super();
 		this.title = title;
 		this.author = author;

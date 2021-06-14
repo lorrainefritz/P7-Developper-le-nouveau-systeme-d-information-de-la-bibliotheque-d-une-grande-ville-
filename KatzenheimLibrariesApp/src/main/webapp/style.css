@@ -82,7 +82,7 @@ header .header_bottom_part {
 
 .image_holder {
 
-	background-color: rgb(215, 215, 255);
+	background-color: #ead7ff215215255;
 }
 
 /* articles */
@@ -110,6 +110,66 @@ header .header_bottom_part {
 
 	
 }
+
+/* ---------------------------------------------------------------- */
+/* pages formulaires */
+.page_formulaire {
+	background-color: rgb(189, 244, 226);
+}
+
+.formulaire {
+	padding-top: 1%;
+	padding-bottom: 1%;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+/* ---------------------------------------------------------------- */
+/* Liste des bibliothèques */
+
+
+#blocPageLibrariesList{
+	padding-top: 1%;
+	padding-bottom: 1%;
+	background-color: rgb(189, 244, 226);
+}
+#descriptionLibrariesList{
+		
+	background-color: white;
+	border: 1px solid black; 	
+}
+#blocPageLibrariesList h3{
+	font-family:'Brush Script MT', cursive;
+}
+
+
+#buttonSuppressionLibrary:hover {
+  background-color: red;
+}
+
+/* ---------------------------------------------------------------- */
+/* Liste des Livres */
+
+#searchField{
+	margin-left: 5%;
+}
+#blocPageBooksList{
+	padding-top: 1%;
+	padding-bottom: 1%;
+	background-color: rgb(173, 212, 251);
+}
+#descriptionBooksList{
+		
+	background-color: white;
+	border: 1px solid black; 	
+}
+#blocPageBooksList h3{
+	font-family:'Brush Script MT', cursive;
+}
+
+#buttonSuppressionBook:hover {
+  background-color: red;
+}
+
 
 
 /* ---------------------------------------------------------------- */

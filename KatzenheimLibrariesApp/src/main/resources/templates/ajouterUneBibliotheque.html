@@ -1,0 +1,87 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Les Amis de L'escalade</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<div class="bloc_page">
+		<header>
+			<div class="header_top_part">
+				<div th:insert="menu.html"></div>
+			</div>
+			<div class="header_bottom_part">
+				<h1>AJOUTER UNE BIBLIOTHEQUE</h1>
+			</div>
+		</header>
+		<div class="page_formulaire">
+			<div class="container-fluid pt-3">
+				<form th:action="@{/ajouterUneBibliotheque}"
+					th:object="${library}" method="post" class="formulaire"
+					name="formulaire">
+
+					<div class="col-lg-8 form-group">
+						<input type="hidden" id="id" class="form-control" th:field="*{id}">
+					</div>
+
+					<div class="col-lg-8 form-group">
+						<label for="name">NOM</label> <input th:field="*{name}"
+							type="text" class="form_label" id="nameLibrary"
+							name="name" placeholder="Obligatoire">
+						<div class="element_danger">
+							<div id="errorNameLibrary"></div>
+							<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+						</div>
+					</div>
+
+					<div class="col-lg-8 form-group">
+						<label for="address">ADRESSE</label> <input th:field="*{address}"
+							type="text" class="form_label" id="addressLibrary" name="address"
+							placeholder="Obligatoire">
+						<div class="element_danger">
+							<div id="errorAddressLibrary"></div>
+							<div th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
+						</div>
+					</div>
+
+					<div class="col-lg-8 form-group">
+						<label for="email">EMAIL</label> <input th:field="*{email}"
+							type="text" class="form_label" id="emailLibrary"
+							name="email" placeholder="Obligatoire">
+						<div class="element_danger">
+							<div id="emailLibrary"></div>
+							<div th:if="${#fields.hasErrors('email')}"
+								th:errors="*{email}"></div>
+						</div>
+					</div>
+
+					<div class="col-lg-8 form-group">
+						<label for="phone">TELEPHONE</label> <input
+							th:field="*{phone}" type="text" class="form_label"
+							id="phoneLibrary" name="phone" placeholder="Obligatoire">
+						<div class="element_danger">
+							<div id="phoneLibrary"></div>
+							<div th:if="${#fields.hasErrors('phone')}"
+								th:errors="*{phone}"></div>
+						</div>
+					</div>
+
+					<div class="col-lg-8 form-group">
+						<button type="submit" class="btn btn-primary" id="btn_form_submit" onclick="validateLibrary()">Soumettre</button>
+					</div>
+					<div class="col-lg-8 form-group">
+						<button type="button" class="btn btn-primary" id="btn_form_test"
+							onclick="validateLibrary()">TESTING JS</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<footer>
+			<div th:insert="footer.html"></div>
+		</footer>
+	</div>
+</body>
+</html>

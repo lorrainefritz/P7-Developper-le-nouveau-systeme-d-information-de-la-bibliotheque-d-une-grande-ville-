@@ -26,6 +26,12 @@ public Library getOneLibraryById(Integer id) {
 	logger.info("in LibraryService in getOneLibraryById method");
 	return libraryRepository.getById(id);
 }
+public Library  getOneLibraryByName(String name) {
+	logger.info("in LibraryService in getOneLibraryByName method");
+	return libraryRepository.findByName(name);
+}
+
+
 
 public Library saveLibrary(Library library) {
 	logger.info("in LibraryService in saveLibrary method");
@@ -36,6 +42,8 @@ public void deleteLibrary(Library library) {
 	logger.info("in LibraryService in deleteLibrary method");
 	libraryRepository.delete(library);
 }
+
+
 
 
 }
