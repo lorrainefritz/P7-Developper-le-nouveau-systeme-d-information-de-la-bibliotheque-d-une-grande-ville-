@@ -66,6 +66,6 @@ public class LibraryController {
 	public String editLibrary(Model model, Integer id) {
 		logger.info("HTTP GET request received at /modifierUneBibliothèque where library name = " + libraryService.getOneLibraryById(id).getName());
 		model.addAttribute("library", libraryService.getOneLibraryById(id));
-		return "ajouterDesLivres";
+		return "ajouterUneBibliotheque";
 	}
 }

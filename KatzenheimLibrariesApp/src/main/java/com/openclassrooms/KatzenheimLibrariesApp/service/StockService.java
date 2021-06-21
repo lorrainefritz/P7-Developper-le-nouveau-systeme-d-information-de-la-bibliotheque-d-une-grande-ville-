@@ -28,6 +28,10 @@ public class StockService {
 	
 	public Stock saveStock (Stock stock) {
 		logger.info("in StockService in saveStock method");
+		stock.setNumberOfCopiesAvailable(stock.getTotalOfCopies()- stock.getNumberOfCopiesOut());
+		if(stock.getNumberOfCopiesAvailable()>0){
+			stock.setBookIsAvailable(true);
+		}
 		return stockRepository.save(stock);
 	}
 	

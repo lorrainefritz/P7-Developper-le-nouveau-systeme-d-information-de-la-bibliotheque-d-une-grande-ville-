@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.openclassrooms.KatzenheimLibrariesApp.entities.Book;
+import com.openclassrooms.KatzenheimLibrariesApp.entities.Library;
 import com.openclassrooms.KatzenheimLibrariesApp.repository.BookRepository;
 
 @Service
@@ -59,6 +60,7 @@ public class BookService {
 	
 	public void deleteBook(Book book) {
 		logger.info("in BookService in deleteBook method");
+		book.setLibrary(null);
 		bookRepository.delete(book);
 	}
 	

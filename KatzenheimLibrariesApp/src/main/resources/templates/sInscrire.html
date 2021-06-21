@@ -1,0 +1,94 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<div class="header_top_part">
+			<div th:insert="menu.html"></div>
+		</div>
+		<div class="header_bottom_part">
+			<h1>S'INSCRIRE</h1>
+		</div>
+	</header>
+	<div class="page_formulaire">
+		<div class="container-fluid pt-3">
+			<form th:action="@{/sInscrire}" method="post" th:object="${libraryUser}">
+
+				<div class="col-lg-8 form-group">
+					<label for="firstName">PRENOM</label> <input type="text" th:field="*{firstName}"
+						id="firstNameRegistration" class="form-control">
+					<div class="element_danger">
+						<div id="errorFirstNameRegistration"></div>
+						<div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+					</div>
+				</div>
+
+				<div class="col-lg-8 form-group">
+					<label for="lastName">NOM</label> <input type="text"
+						th:field="*{lastName}" id="lastNameRegistration" class="form-control">
+					<div class="element_danger">
+						<div id="errorLastNameRegistration"></div>
+						<div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+					</div>
+				</div>
+				
+				<div class="col-lg-8 form-group">
+					<label for="email">EMAIL</label> <input type="text"
+						th:field="*{email}" id="emailRegistration" class="form-control">
+					<div class="element_danger">
+						<div id="errorEmailRegistration"></div>
+						<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+					</div>
+				</div>
+
+				<div class="col-lg-8 form-group">
+					<label for="address">ADRESSE</label> <input type="text"
+						th:field="*{address}" id="addressRegistration" class="form-control">
+					<div class="element_danger">
+						<div id="errorAddressRegistration"></div>
+						<div th:if="${#fields.hasErrors('address')}"
+							th:errors="*{address}"></div>
+					</div>
+				</div>
+
+				
+				<div class="col-lg-8 form-group">
+					<label for="phone">TELEPHONE</label> <input type="text"
+						th:field="*{phone}" id="phoneRegistration" class="form-control">
+					<div class="element_danger">
+						<div id="errorPhoneRegistration"></div>
+						<div th:if="${#fields.hasErrors('phone')}"
+							th:errors="*{phone}"></div>
+					</div>
+				</div>
+
+				<div class="col-lg-8 form-group">
+					<label for="password">MOT DE PASSE</label> <input type="text"
+						th:field="*{password}" id="passwordRegistration" class="form-control">
+					<div class="element_danger">
+						<div id="errorPasswordRegistration"></div>
+						<div th:if="${#fields.hasErrors('password')}"
+							th:errors="*{password}"></div>
+					</div>
+				</div>
+				
+
+
+				<div class="col-lg-8 form-group">
+					<button type="submit" class="btn btn-primary" onclick="validateRegistration()">S'enregistrer</button>
+				</div>
+				<div class="col-lg-8 form-group">
+				<button type="button" class="btn btn-primary" onclick="validateRegistration()">Test
+					JS</button>
+				</div>	
+			</form>
+		</div>
+		<footer>
+			<div th:insert="footer.html"></div>
+		</footer>
+	</div>
+</body>
+</html>

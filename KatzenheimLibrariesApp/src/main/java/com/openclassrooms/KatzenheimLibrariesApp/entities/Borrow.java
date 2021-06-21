@@ -4,11 +4,16 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -45,18 +50,32 @@ public class Borrow implements Serializable {/**
 	@Column(name="RETURN_DATE")
 	private Date returnDate;
 	
+	@Column(name="IS_OUTDATED")
+	private boolean IsOutdated;
+	
 	@Column(name="ALREADY_EXTENDED")
 	private boolean alreadyExtended;
 	
 	@Column(name="NUMBER_RELAUNCH")
 	private int numberOfRelaunch;
+	
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "BORROWS_BOOKS",
+			joinColumns = @JoinColumn(
+					name = "BORROWS_ID", referencedColumnName = "ID"),
+			inverseJoinColumns = @JoinColumn
+			(name = "BOOKS_ID", referencedColumnName = "ID"))
+	private Book book;
 
-	public Borrow(Date startDate, Date returnDate, boolean alreadyExtended, int numberOfRelaunch) {
+	public Borrow(Date startDate, Date returnDate, boolean isOutdated, boolean alreadyExtended, int numberOfRelaunch,
+			Book book) {
 		super();
 		this.startDate = startDate;
 		this.returnDate = returnDate;
+		IsOutdated = isOutdated;
 		this.alreadyExtended = alreadyExtended;
 		this.numberOfRelaunch = numberOfRelaunch;
+		this.book = book;
 	}
-	
+		
 }

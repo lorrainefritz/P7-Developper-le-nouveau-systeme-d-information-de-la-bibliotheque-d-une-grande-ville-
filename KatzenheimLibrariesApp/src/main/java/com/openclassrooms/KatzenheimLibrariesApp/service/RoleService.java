@@ -23,7 +23,7 @@ public class RoleService {
 	}
 	
 public Role getOneRoleById(Integer id) {
-	logger.info("in RoleService in addRole method");
+	logger.info("in RoleService in getOneRole method");
 	return roleRepository.getById(id);
 	}
 	

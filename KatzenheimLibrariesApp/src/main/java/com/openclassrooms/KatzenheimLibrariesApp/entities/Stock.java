@@ -53,15 +53,27 @@ public class Stock implements Serializable {/**
 //	@NotNull(message="Ce champ ne doit pas être vide")
 	private int totalOfCopies;
 
-	public Stock(
-			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") int numberOfCopiesAvailable,
-			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") int numberOfCopiesOut,
-			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") int totalOfCopies) {
+	@Column(name="BOOK_IS_AVAILABLE")
+//	@Min(value=0, message="doit ête compris entre 1 et 10")
+//	@Max(value=99, message="doit ête compris entre 1 et 10")
+//	@NotNull(message="Ce champ ne doit pas être vide")
+	private boolean bookIsAvailable;
+
+	public Stock(Integer id, int numberOfCopiesAvailable, int numberOfCopiesOut, int totalOfCopies,
+			boolean bookIsAvailable) {
 		super();
-		this.numberOfCopiesAvailable = totalOfCopies-numberOfCopiesOut;
+		this.id = id;
+		this.numberOfCopiesAvailable = numberOfCopiesAvailable;
 		this.numberOfCopiesOut = numberOfCopiesOut;
 		this.totalOfCopies = totalOfCopies;
+		this.bookIsAvailable = bookIsAvailable;
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

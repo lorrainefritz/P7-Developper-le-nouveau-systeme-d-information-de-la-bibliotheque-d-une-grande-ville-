@@ -57,25 +57,27 @@ public class Library implements Serializable {
 	@NotBlank(message="Ce champ ne doit pas être vide")
 	private String phone;
 	
-//	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//	@JoinTable(
-//	name = "LIBRARY_BOOKS",
-//	joinColumns = @JoinColumn(
-//			name = "LIBRARIES_ID", referencedColumnName = "ID"),
-//	inverseJoinColumns = @JoinColumn
-//	(name = "BOOKS_ID", referencedColumnName = "ID"))
-//	private Collection <Book> books;
+	@Column(name="OPENING")
+	@Size(max=65, message="65 charactères maximum")
+	@NotBlank(message="Ce champ ne doit pas être vide")
+	private String openingTime;
 
 	public Library(
 			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") String name,
 			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") String address,
 			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") String email,
-			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") String phone) {
+			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") String phone,
+			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") String openingTime) {
 		super();
 		this.name = name;
 		this.address = address;
 		this.email = email;
 		this.phone = phone;
+		this.openingTime = openingTime;
 	}
+	
+	
+
+	
 	
 }

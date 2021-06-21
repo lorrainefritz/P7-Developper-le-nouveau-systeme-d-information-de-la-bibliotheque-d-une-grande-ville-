@@ -1,0 +1,99 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="bloc_page">
+		<header>
+			<div class="header_top_part">
+				<div th:insert="menu.html"></div>
+			</div>
+			<div class="header_bottom_part">
+				<h1>MON COMPTE</h1>
+			</div>
+		</header>
+
+
+		<div class="d-flex flex-column align-items-center"
+			id="blocPageMonCompte">
+
+			<div class="p-2 border" id="MonCompteInfos">
+				<h2>Mes informations générales</h2>
+				<div>
+					PRENOM : <a th:text="${currentLibraryUser.firstName}"></a>
+				</div>
+				<div>
+					NOM : <a th:text="${currentLibraryUser.lastName}"></a>
+				</div>
+				<div>
+					ADRESSE : <a th:text="${currentLibraryUser.address}"></a>
+				</div>
+				<div>
+					TELEPHONE : <a th:text="${currentLibraryUser.phone}"></a>
+				</div>
+				<div>
+					EMAIL : <a th:text="${currentLibraryUser.email}"></a>
+				</div>
+				<div sec:authorize="hasRole('ADMIN')">
+					MES AUTORISATIONS : <a th:text="${userDetails.authorities}"></a>
+				</div>
+				<div>
+					<a class="btn btn-warning" th:href="@{editUser}">Modifier mes
+						informations</a>
+				</div>
+			</div>
+
+
+ 			<div class="p-2 border" id="MonCompteBorrows">
+				<h2>Mes Emprunts</h2>
+
+				<!-- <div>
+					<a class="btn btn-primary" th:href="@{faireUneDemandeDemprunt}">Faire
+						une demande d'emprunt</a>
+				</div> -->
+
+				<div id="OneBorrowMonCompte" th:each="borrow,custStat:${borrows}">
+
+					<div class="float-right" th:if="${borrow.IsOutdated == true}">
+						<a> <img class="img-fluid" alt="borrow is Outdate"
+							src="/imagesAndLogos/logos/borrowIsOutdated.png">
+						</a>
+					</div>
+	
+					<h3 th:each="currentBook: ${borrow.book}">
+						<a th:text="${currentBook.title}"></a>
+					</h3>
+					<div>
+						DATE D'EMPRUNT <a th:text="${borrow.startDate}"></a>
+					</div>
+					<div>
+						DATE SE RETOUR ATTENDUE <a th:text="${borrow.returnDate}"></a>
+					</div>
+					
+					<div>
+						DEJA PROLONGE <a th:text="${borrow.alreadyExtended}"></a>
+					</div>
+					
+					 
+				<!-- 	<div>
+						<a class="btn btn-warning" th:href="@{prolongerUnLivre(id=${book.id})}">Prolonger le livre</a>
+					</div> -->
+			<!-- 		<div>
+						<a class="btn btn-dark" id="buttonSuppressionTopo"
+							th:href="@{rendreLeLivre(custStat=${custStat.index},id=${topo.id})}">Supprimer</a>
+					</div> -->
+
+				</div> 
+
+			</div>
+		</div>
+
+		<footer>
+			<div th:insert="footer.html"></div>
+		</footer>
+	</div>
+</body>
+</html>
