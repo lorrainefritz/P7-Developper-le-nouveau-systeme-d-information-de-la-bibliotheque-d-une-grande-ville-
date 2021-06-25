@@ -28,15 +28,19 @@ public class StockService {
 	
 	public Stock saveStock (Stock stock) {
 		logger.info("in StockService in saveStock method");
-		stock.setNumberOfCopiesAvailable(stock.getTotalOfCopies()- stock.getNumberOfCopiesOut());
+		
 		if(stock.getNumberOfCopiesAvailable()>0){
+			logger.info("in StockService in saveStock method in if copiesAvailable>0");
 			stock.setBookIsAvailable(true);
+		}else if(stock.getNumberOfCopiesAvailable()==0) {
+			logger.info("in StockService in saveStock method in if copiesAvailable=0");
+			stock.setBookIsAvailable(false);
 		}
 		return stockRepository.save(stock);
 	}
 	
 	public void deleteStock (Stock stock) {
-		logger.info("in StockService in deleteStock method");
+		logger.info("in StockService in deleteStock method" + stock.getId());
 		stockRepository.delete(stock);
 	}
 }

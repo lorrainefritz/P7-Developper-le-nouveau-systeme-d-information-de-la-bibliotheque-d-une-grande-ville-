@@ -36,27 +36,18 @@ public class Stock implements Serializable {/**
 	private Integer id;
 	
 	@Column(name="NUMBER_AVAILABLE")
-//	@Min(value=0, message="doit ête compris entre 1 et 10")
-//	@Max(value=10, message="doit ête compris entre 1 et 10")
-//	@NotNull(message="Ce champ ne doit pas être vide")
 	private int numberOfCopiesAvailable;
 	
 	@Column(name="NUMBER_OUT")
-//	@Min(value=0, message="doit ête compris entre 1 et 10")
-//	@Max(value=10, message="doit ête compris entre 1 et 10")
-//	@NotNull(message="Ce champ ne doit pas être vide")
 	private int numberOfCopiesOut;
 	
 	@Column(name="TOTAL_COPIES")
-//	@Min(value=0, message="doit ête compris entre 1 et 10")
-//	@Max(value=99, message="doit ête compris entre 1 et 10")
-//	@NotNull(message="Ce champ ne doit pas être vide")
+	@Min(value=0, message="doit ête compris entre 1 et 10")
+	@Max(value=10, message="doit ête compris entre 1 et 10")
+	@NotNull(message="Ce champ ne doit pas être vide")
 	private int totalOfCopies;
 
 	@Column(name="BOOK_IS_AVAILABLE")
-//	@Min(value=0, message="doit ête compris entre 1 et 10")
-//	@Max(value=99, message="doit ête compris entre 1 et 10")
-//	@NotNull(message="Ce champ ne doit pas être vide")
 	private boolean bookIsAvailable;
 
 	public Stock(Integer id, int numberOfCopiesAvailable, int numberOfCopiesOut, int totalOfCopies,

@@ -1,8 +1,9 @@
 package com.openclassrooms.KatzenheimLibrariesApp.service;
 
-import java.sql.Date;
+import java.util.Date;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -48,6 +49,17 @@ public class BorrowService {
 		borrow.setReturnDate(Date.from(Instant.now().plus(28, ChronoUnit.DAYS)));
 		//on set le livre
 		borrow.setBook(book);
+		saveBorrow(borrow);
+	}
+
+	public void extendBorrow(Borrow borrow) {
+		Date returnDate = borrow.getReturnDate();
+		 Calendar cal = Calendar.getInstance();
+		 cal.setTime(returnDate);
+		 cal.add(Calendar.DATE, 28);
+		 Date date = (Date) cal.getTime();
+		borrow.setReturnDate(date);
+		borrow.setAlreadyExtended(true);
 		saveBorrow(borrow);
 	}
 	

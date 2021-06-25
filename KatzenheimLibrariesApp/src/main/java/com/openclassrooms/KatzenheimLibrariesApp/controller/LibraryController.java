@@ -28,7 +28,7 @@ public class LibraryController {
 		return ("/listeDesBibliotheques");
 	}
 
-//@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/ajouterUneBibliotheque")
 	public String showLibraryForm(Model model) {
 		logger.info("HTTP GET request received at /ajouterUneBibliothèque");
@@ -36,14 +36,14 @@ public class LibraryController {
 		return ("/ajouterUneBibliotheque");
 	}
 
-//@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/ajouterUneBibliotheque")
 	public String submitLibraryForm(@Validated @ModelAttribute("library") Library library,
 			BindingResult bindingResult) {
 		logger.info("HTTP POST request received at /ajouterUneBibliothèque");
 		if (bindingResult.hasErrors()) {
 			logger.info("HTTP POST request received at /ajouterUneBibliothèque where bindingResult has error");
-			return ("/ajouterUneBibliothèque");
+			return ("/ajouterUneBibliotheque");
 		} else {
 			logger.info(
 					"HTTP POST request received at /ajouterUneBibliothèque where library name = " + library.getName());
@@ -52,7 +52,7 @@ public class LibraryController {
 		return ("redirect:/listeDesBibliotheques");
 	}
 
-//@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/supprimerUneBibliotheque")
 	public String deleteLibrary(Integer id) {
 		logger.info("HTTP GET request received at /supprimerUneBibliothèque where library name = " + libraryService.getOneLibraryById(id).getName());
@@ -61,7 +61,7 @@ public class LibraryController {
 		return ("redirect:/listeDesBibliotheques");
 	}
 
-//@PreAuthorize("hasRole('ADMIN')")	
+	@PreAuthorize("hasRole('ADMIN')")	
 	@GetMapping(path="/modifierUneBibliotheque")
 	public String editLibrary(Model model, Integer id) {
 		logger.info("HTTP GET request received at /modifierUneBibliothèque where library name = " + libraryService.getOneLibraryById(id).getName());

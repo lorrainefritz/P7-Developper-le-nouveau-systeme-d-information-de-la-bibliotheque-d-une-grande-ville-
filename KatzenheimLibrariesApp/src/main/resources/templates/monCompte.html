@@ -2,7 +2,7 @@
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Les Bibliothèques de Katzenheim</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -41,7 +41,7 @@
 					MES AUTORISATIONS : <a th:text="${userDetails.authorities}"></a>
 				</div>
 				<div>
-					<a class="btn btn-warning" th:href="@{editUser}">Modifier mes
+					<a class="btn btn-warning" th:href="@{modifierMonCompte}">Modifier mes
 						informations</a>
 				</div>
 			</div>
@@ -50,11 +50,7 @@
  			<div class="p-2 border" id="MonCompteBorrows">
 				<h2>Mes Emprunts</h2>
 
-				<!-- <div>
-					<a class="btn btn-primary" th:href="@{faireUneDemandeDemprunt}">Faire
-						une demande d'emprunt</a>
-				</div> -->
-
+				
 				<div id="OneBorrowMonCompte" th:each="borrow,custStat:${borrows}">
 
 					<div class="float-right" th:if="${borrow.IsOutdated == true}">
@@ -62,29 +58,33 @@
 							src="/imagesAndLogos/logos/borrowIsOutdated.png">
 						</a>
 					</div>
+					<div class="float-right" th:if="${borrow.alreadyExtended == true}">
+						<a> <img class="img-fluid" alt="borrow is Already extended"
+							src="/imagesAndLogos/logos/borrowAlreadyExtended.png">
+						</a>
+					</div>
+					<div class="float-right" th:if="${borrow.alreadyExtended == true}">
+						<a> <img class="img-fluid" alt="borrow is Outdate"
+							src="/imagesAndLogos/logos/borrowIsOutdated.png">
+						</a>
+					</div>
+					
 	
 					<h3 th:each="currentBook: ${borrow.book}">
 						<a th:text="${currentBook.title}"></a>
 					</h3>
-					<div>
-						DATE D'EMPRUNT <a th:text="${borrow.startDate}"></a>
+					<div>							
+						Date d'emprunt : <a th:text="${#dates.format(borrow.startDate, 'dd-MMM-yyyy')}"></a>
 					</div>
 					<div>
-						DATE SE RETOUR ATTENDUE <a th:text="${borrow.returnDate}"></a>
-					</div>
-					
-					<div>
-						DEJA PROLONGE <a th:text="${borrow.alreadyExtended}"></a>
+						Date de retour : <a th:text="${#dates.format(borrow.returnDate, 'dd-MMM-yyyy')}"></a>
 					</div>
 					
-					 
-				<!-- 	<div>
-						<a class="btn btn-warning" th:href="@{prolongerUnLivre(id=${book.id})}">Prolonger le livre</a>
-					</div> -->
-			<!-- 		<div>
-						<a class="btn btn-dark" id="buttonSuppressionTopo"
-							th:href="@{rendreLeLivre(custStat=${custStat.index},id=${topo.id})}">Supprimer</a>
-					</div> -->
+					
+					<div  th:if="${borrow.alreadyExtended == false}">
+						<a class="btn btn-warning" th:href="@{prolongerUnLivre(id=${borrow.id})}">Prolonger le livre</a>			
+					</div>
+					
 
 				</div> 
 

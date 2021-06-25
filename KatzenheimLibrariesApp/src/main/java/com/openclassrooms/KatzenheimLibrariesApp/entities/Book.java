@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import lombok.Getter;
@@ -75,7 +77,8 @@ public class Book {
 	private String shelve;
 	
 	
-	
+//	@NotNull(message = "la date donnée ne doit pas être nulle")    
+//	@Past(message = "la date donnée doit être passée")
 	@Column(name="CREATION_DATE")
 	private String creationDate;
 	
@@ -99,25 +102,32 @@ public class Book {
 			(name = "STOCKS_ID", referencedColumnName = "ID"))
 	private Stock stock;
 
-	
 	public Book(
 			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") String title,
 			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") String author,
+			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") String type,
 			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") String summary,
 			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") String publisher,
 			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") String language,
+			@Size(max = 65, message = "65 charactères maximum") @NotBlank(message = "Ce champ ne doit pas être vide") String shelve,
 			String creationDate, String cover, Library library, Stock stock) {
 		super();
 		this.title = title;
 		this.author = author;
+		this.type = type;
 		this.summary = summary;
 		this.publisher = publisher;
 		this.language = language;
+		this.shelve = shelve;
 		this.creationDate = creationDate;
 		this.cover = cover;
 		this.library = library;
 		this.stock = stock;
 	}
+
+
+
+	
 
 	
 	

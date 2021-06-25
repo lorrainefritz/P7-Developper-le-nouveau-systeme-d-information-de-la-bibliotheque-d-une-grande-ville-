@@ -2,7 +2,7 @@
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
-<title>Les Amis de L'escalade</title>
+<title>Les Bibliothèques de Katzenheim</title>
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -96,7 +96,7 @@
 						<label for="creationDate">DATE D'EDITION</label> <input
 							th:field="*{creationDate}" type="date" class="form_label"
 							id="creationDateBook" name="creationDate"
-							placeholder="Obligatoire">
+							placeholder="Obligatoire" min="1979-12-31" max="2021-07-24">
 						<div class="element_danger">
 							<div id="errorCreationDateBook"></div>
 							<div th:if="${#fields.hasErrors('creationDate')}"
@@ -120,13 +120,9 @@
 						<!-- <input type="hidden" id="id" class="form-control" th:field="*{id}"> -->
 
 						<label for="totalOfCopies">NOMBRE DE COPIES</label> <input
-							th:field="*{totalOfCopies}" type="text" class="form_label"
-							id="totalOfCopiesStock" name="totalOfCopies" placeholder="1-10">
-						<div class="element_danger">
-							<div id="errortotalOfCopiesStock"></div>
-							<div th:if="${#fields.hasErrors('totalOfCopies')}"
-								th:errors="*{totalOfCopies}"></div>
-						</div>
+							th:field="*{totalOfCopies}" type="number" class="form_label"
+							id="totalOfCopiesStock" name="totalOfCopies" min="1" max="10">
+						
 					</div>
 
 					

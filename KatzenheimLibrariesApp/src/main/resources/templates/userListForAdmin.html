@@ -1,0 +1,60 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Les Bibliothèques de Katzenheim</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="bloc_page">
+		<header>
+			<div class="header_top_part">
+				<div th:insert="menu.html"></div>
+			</div>
+			<div class="header_bottom_part">
+				<h1>TOUS LES UTILISATEURS</h1>
+			</div>
+		</header>
+		<div id="blocPageLibraryUserList">
+			<table class="col-md-6 table">
+				<thead class="table top">
+					<tr>
+						<th>ID</th>
+						<th>PRENOM</th>
+						<th>NOM</th>
+						<th>ADRESSE</th>
+						<th>TELEPHONE</th>
+						<th>EMAIL</th>
+						<th> LES ROLES</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="libraryUser:${libraryUsers}">
+						<td th:text="${libraryUser.id}"></td>
+						<td th:text="${libraryUser.firstName}"></td>
+						<td th:text="${libraryUser.lastName}"></td>
+						<td th:text="${libraryUser.address}"></td>
+						<td th:text="${libraryUser.phone}"></td>
+						<td th:text="${libraryUser.email}"></td>
+						<!-- <td th:text="${libraryUser.authorities}"></td> -->
+						<td th:each ="role:${libraryUser.roles}">
+						<ul th:text="${role.name}"></ul> 
+						</td>
+						
+
+						<td><a class="btn btn-warning btn-lg"  th:href="@{editUserByIdWhenAdmin(id=${libraryUser.id})}">
+								Modifier</a></td>
+						
+						<td><a class="btn btn-dark btn-lg" id="buttonSuppressionMember"
+							onclick="return confirm('êtes vous sur de vouloir supprimer?')"
+							th:href="@{deleteUserByIdWhenAdmin(id=${libraryUser.id})}"> Supprimer</a></td>
+						
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<footer>
+			<div th:insert="footer.html"></div>
+		</footer>
+	</div>
+</body>
+</html>

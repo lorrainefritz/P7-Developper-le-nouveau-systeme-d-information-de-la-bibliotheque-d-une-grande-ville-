@@ -1,0 +1,55 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Les Bibliothèques de Katzenheim</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<div class="bloc_page">
+		<header>
+			<div class="header_top_part">
+				<div th:insert="menu.html"></div>
+			</div>
+			<div class="header_bottom_part">
+				<h1>AJOUTER UNE IMAGE DE COUVERTURE :</h1>
+				<h1 th:text="${book.title}"></h1>
+			</div>
+		</header>
+		<div class="page_formulaire">
+			<div class="container-fluid pt-3">
+				<form th:action="@{/ajouterUneImageDeCouvertureAuLivre}" method="post"
+					class="formulaire" name="formulaire" enctype="multipart/form-data">
+
+					
+					<div class="col-lg-8 form-group">
+						<label>Image : </label>
+						<input type="file" name="fileImage" id="imagebook" accept="image/png, image/jpeg">
+					</div>
+			
+							
+					<div class="element_danger">
+						<div id="errorImageSiteEscalade"></div>
+					</div>
+					
+
+					
+
+					<div class="col-lg-8 form-group">
+						<button type="submit" class="btn btn-primary" id="btn_form_submit" onclick="validateImage()">Soumettre</button>
+					</div>
+					<div class="col-lg-8 form-group">
+						<button type="button" class="btn btn-primary" id="btn_form_test"
+							onclick="validateImage()">TESTING JS</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<footer>
+			<div th:insert="footer.html"></div>
+		</footer>
+	</div>
+</body>
+</html>

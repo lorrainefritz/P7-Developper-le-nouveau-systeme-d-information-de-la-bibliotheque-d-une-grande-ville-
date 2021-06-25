@@ -13,12 +13,51 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import com.openclassrooms.KatzenheimLibrariesApp.entities.LibraryUser;
+import com.openclassrooms.KatzenheimLibrariesApp.service.BatchProcessingService;
+import com.openclassrooms.KatzenheimLibrariesApp.service.BorrowService;
 
-//@Configuration
-//@EnableBatchProcessing
+@Configuration
+@EnableBatchProcessing
+@EnableScheduling
 public class SpringBatchConfig {
+
+	@Autowired private JobBuilderFactory jobBuilderFactory;
+	@Autowired private StepBuilderFactory stepBuilderFactory;
+//	@Autowired private ItemReader <LibraryUser> itemReader;
+//	@Autowired private ItemWriter <LibraryUser> itemWriter;
+//	@Autowired private ItemProcessor<LibraryUser,LibraryUser> itemProcessor;
+	@Autowired BatchProcessingService batchProcessingService ;
+	
+	
+  @Bean
+  @Scheduled(cron="0 0 4-5 * * *")
+	public Job job() {
+		
+	  batchProcessingService.batchProcessing();
+		Step step = stepBuilderFactory.get("step-load-data")
+				.<LibraryUser,LibraryUser> chunk(100)
+				.build();
+				;
+				
+	return jobBuilderFactory.get("ETL-Load")
+			.incrementer(new RunIdIncrementer())
+			.start(step)
+			.build();
+		
+	}
+	
+}
+	
+	
+	
+	
+	
+	
+	
 
 //	@Autowired private JobBuilderFactory jobBuilderFactory;
 //	@Autowired private StepBuilderFactory stepBuilderFactory;
@@ -44,4 +83,4 @@ public class SpringBatchConfig {
 //		
 //	}
 	
-}
+

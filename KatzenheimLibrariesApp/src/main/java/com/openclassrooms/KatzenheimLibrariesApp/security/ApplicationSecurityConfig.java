@@ -60,31 +60,50 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 					"/listeDesLivres",
 					"/identification",
 					"/sInscrire",
-					"/login",
-					"/imageAndLogos/*",
+					"/identification",
+					"/webapp/*",
+					"/imageAndLogos/**",
+					"/logos/**",
+					"/images/**",
 					"/myScript.js",
-					"/style.css",	
-					//prévoir de passer ça en admin
+					"/style.css"	
+						).permitAll()
+				
+				.antMatchers(
+						"/monCompte",
+						"/prolongerUnLivre",
+						"/modifierMonAdresseEmail",
+						"/modifierMonMotDePasse",
+						"/modifierMonCompteInfosPerso",
+						"/modifierMonCompte",
+						"/emprunterUnLivre"
+						).authenticated()
+				
+				
+				.antMatchers(
 					"/ajouterUneBibliotheque",
 					"/modifierUneBibliotheque",
 					"/supprimerUneBibliotheque",
 					"/ajouterDesLivres",
 					"/modifierUnLivre",
-					"/supprimerUnLivre"
-					
-					).permitAll()
+					"/supprimerUnLivre",
+					"/ajouterUneImageDeCouvertureAuLivre"
+						).hasRole("ADMIN")
 				
+//				.anyRequest().authenticated()
+					
 			.and()
 			 .formLogin()
 			 	.loginPage("/identification")
-			 	.defaultSuccessUrl("/monCompte").permitAll()
+			 	.defaultSuccessUrl("/monCompte")
+			 	
 			 	
 			 .and()
 			  .logout()
 			   .invalidateHttpSession(true)
 			   .clearAuthentication(true)
 			   .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			   .logoutSuccessUrl("/seConnecter?logout")
+			   .logoutSuccessUrl("/identification?logout")
 			   .permitAll();
 			   
 				;

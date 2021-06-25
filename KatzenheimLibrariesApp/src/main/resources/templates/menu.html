@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
+<title>Les Bibliothèques de Katzenheim</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script
@@ -34,7 +35,8 @@
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="/listeDesBibliotheques">La liste
 						des bibliothèques</a> <a class="dropdown-item"
-						href="/ajouterUneBibliotheque">Ajouter une bibliothèque</a> 
+						sec:authorize="hasRole('ADMIN')" href="/ajouterUneBibliotheque">Ajouter
+						une bibliothèque</a>
 				</div>
 			</li>
 
@@ -43,11 +45,9 @@
 					data-toggle="dropdown">Les livres</button>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="/listeDesLivres">La liste des
-						livres</a> 
-						
-					<a class="dropdown-item" href="/ajouterDesLivres">Ajouter des Livres</a>	
-					<!-- <a class="dropdown-item" sec:authorize="isAuthenticated()"
-						href="/ajouterDesLivres">Ajouter des Livres</a> -->
+						livres</a> <a class="dropdown-item" sec:authorize="hasRole('ADMIN')"
+						href="/ajouterDesLivres">Ajouter des Livres</a>
+
 				</div>
 			</li>
 
@@ -62,9 +62,8 @@
 				<button type="button" class="btn btn-primary dropdown-toggle"
 					data-toggle="dropdown">Fonctionnalités ADMIN</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="/listeDesUsers">Liste des
-						Utilisateurs</a> <a class="dropdown-item" href="/listeDesUsers">Liste
-						des Utilisateurs</a> <a class="dropdown-item" href="/editRole">Editer
+					<a class="dropdown-item" href="/userListForAdmin">Liste des
+						Utilisateurs</a> <a class="dropdown-item" href="/editRole">Editer
 						les roles</a>
 				</div>
 			</li>

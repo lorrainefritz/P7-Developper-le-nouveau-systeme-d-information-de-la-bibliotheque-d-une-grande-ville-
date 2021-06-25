@@ -1,0 +1,167 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Les Bibliothèques de Katzenheim</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<div class="header_top_part">
+			<div th:insert="menu.html"></div>
+		</div>
+		<div class="header_bottom_part">
+			<h1>MODIFIER LES INFORMATIONS UTILISATEUR</h1>
+		</div>
+	</header>
+	<div class="page_formulaire">
+		<form th:action="@{/editUserInfosWhenAdmin}" method="post"
+			th:object="${libraryUser}">
+
+			<div class="col-md-6 form-group">
+				<label for="lastName">NOM</label> <input type="text"
+					th:field="*{lastName}" id="lastName" class="form-control"
+					placeholder="${libraryUser.nom}">
+			</div>
+			<div class="col-md-6 form-group">
+				<label for="firstName">PRENOM</label> <input type="text"
+					th:field="*{firstName}" id="firstName" class="form-control"
+					placeholder="${libraryUser.firstName}">
+			</div>
+			<div class="col-md-6 form-group">
+				<label for="address">ADRESSE</label> <input type="text"
+					th:field="*{address}" id="address" class="form-control"
+					placeholder="${libraryUser.address}">
+			</div>
+			<div class="col-md-6 form-group">
+				<label for="phone">TELEPHONE</label> <input type="text"
+					th:field="*{phone}" id="phone" class="form-control"
+					placeholder="${libraryUser.phone}">
+			</div>
+			
+			<div>	
+				<input type="hidden" id="libraryUserId" class="form-control" th:field="*{password}">
+			</div>
+			
+			<div>	
+				<input type="hidden" id="libraryUserId" class="form-control" th:field="*{email}">
+			</div>
+			
+
+			<div class="col-md-6 form-group">
+				<button type="submit" class="btn btn-primary">EDITER</button>
+			</div>
+		</form>
+		<form th:action="@{/editUserPasswordWhenAdmin}" method="post"
+			th:object="${libraryUser}">
+				
+			<div>	
+				<input type="hidden" id="libraryUserFirstName" class="form-control" th:field="*{firstName}">
+			</div>
+			
+			<div>	
+				<input type="hidden" id="libraryUserLastName" class="form-control" th:field="*{lastName}">
+			</div>
+			<div>	
+				<input type="hidden" id="libraryUserAddress" class="form-control" th:field="*{address}">
+			</div>
+			<div>	
+				<input type="hidden" id="libraryUserPhone" class="form-control" th:field="*{phone}">
+			</div>
+			
+			<div>	
+				<input type="hidden" id="libraryUserEmail" class="form-control" th:field="*{email}">
+			</div>
+			
+			<div class="col-md-6 form-group">
+				<label for="password">PASSWORD</label> <input type="text"
+					th:field="*{password}" id="password" class="form-control"
+					placeholder="${libraryUser.password}">
+			</div>
+			<div class="col-md-6 form-group">
+				<button type="submit" class="btn btn-primary">EDITER
+					PASSWORD</button>
+			</div>
+		</form>
+
+		<form th:action="@{/editUserEmailWhenAdmin}" method="post"
+			th:object="${libraryUser}">
+			<div>	
+				<input type="hidden" id="libraryUserId" class="form-control" th:field="*{id}">
+			</div>
+			
+			<div>	
+				<input type="hidden" id="libraryUserFirstName" class="form-control" th:field="*{firstName}">
+			</div>
+			
+			<div>	
+				<input type="hidden" id="libraryUserLastName" class="form-control" th:field="*{lastName}">
+			</div>
+			<div>	
+				<input type="hidden" id="libraryUserAddress" class="form-control" th:field="*{address}">
+			</div>
+			<div>	
+				<input type="hidden" id="libraryUserPhone" class="form-control" th:field="*{phone}">
+			</div>
+			
+			<div>	
+				<input type="hidden" id="libraryUserPassword" class="form-control" th:field="*{password}">
+			</div>
+
+			<div class="col-md-6 form-group">
+				<label for="email">EMAIL</label> <input type="text"
+					th:field="*{email}" id="email" class="form-control"
+					placeholder="${libraryUser.email}">
+			</div>
+			<div class="col-md-6 form-group">
+				<button
+					onclick="return confirm('attention vous allez être déconnecté. Etes vous sur de vouloir procéder?')"
+					type="submit" class="btn btn-primary">EDITER EMAIL</button>
+			</div>
+
+		</form>
+		<div class="col-md-6 form-group" sec:authorize="hasRole('ADMIN')">
+			<form th:action="@{/editUserRolesWhenAdmin}" method="post"
+				th:object="${libraryUser}">
+				<table class="table">
+					<thead class="table top">
+						<tr>
+							<th>ID</th>
+							<th>ROLE</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="libraryUserRole:${libraryUser.roles}">
+							<td th:text="${libraryUserRole.id}"></td>
+							<td th:text="${libraryUserRole.name}"></td>
+							<td><a th:href="@{deleteUserRoleWhenAdmin(id=${libraryUserRole.id})}">Supprimer</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<div th:object="${libraryUser}">	
+						<input type="hidden" id="libraryUserId" class="form-control" th:field="*{id}">
+				</div>
+			</form>
+			 <div sec:authorize="hasRole('ADMIN')">
+				<form th:action="@{/editUserRolesWhenAdmin}" method="post"
+					th:object="${role}">
+						<select th:field="*{id}">
+							<option th:each="aRole:${allRoles}" th:value="${aRole.id}"
+								th:text="${aRole.name}"></option>
+						</select>
+					<div th:object="${libraryUser}">	
+						<input type="hidden" id="libraryUserId" class="form-control" th:field="*{id}">
+					</div>	
+					<div>
+						<button type="submit" class="btn btn-primary">AJOUTER
+							ROLE</button>
+					</div>
+				</form>
+			</div> 
+		</div>
+		<footer>
+			<div th:insert="footer.html"></div>
+		</footer>
+	</div>
+</body>
+</html>
