@@ -59,6 +59,9 @@ public class Borrow implements Serializable {/**
 	@Column(name="NUMBER_RELAUNCH")
 	private int numberOfRelaunch;
 	
+	@Column(name="LIBRARY_USER_EMAIL")
+	private String libraryUserEmail;
+	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "BORROWS_BOOKS",
 			joinColumns = @JoinColumn(
@@ -68,14 +71,19 @@ public class Borrow implements Serializable {/**
 	private Book book;
 
 	public Borrow(Date startDate, Date returnDate, boolean isOutdated, boolean alreadyExtended, int numberOfRelaunch,
-			Book book) {
+			String libraryUserEmail, Book book) {
 		super();
 		this.startDate = startDate;
 		this.returnDate = returnDate;
 		IsOutdated = isOutdated;
 		this.alreadyExtended = alreadyExtended;
 		this.numberOfRelaunch = numberOfRelaunch;
+		this.libraryUserEmail = libraryUserEmail;
 		this.book = book;
 	}
+	
+	
+
+	
 		
 }

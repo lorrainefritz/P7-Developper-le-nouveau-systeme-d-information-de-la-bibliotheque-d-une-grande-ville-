@@ -1,5 +1,7 @@
 package com.openclassrooms.KatzenheimLibrariesApp.batchConfig;
 
+import javax.transaction.Transactional;
+
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -16,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import com.openclassrooms.KatzenheimLibrariesApp.entities.Borrow;
 import com.openclassrooms.KatzenheimLibrariesApp.entities.LibraryUser;
 import com.openclassrooms.KatzenheimLibrariesApp.service.BatchProcessingService;
 import com.openclassrooms.KatzenheimLibrariesApp.service.BorrowService;
@@ -33,20 +36,25 @@ public class SpringBatchConfig {
 	@Autowired BatchProcessingService batchProcessingService ;
 	
 	
-  @Bean
-  @Scheduled(cron="0 0 4-5 * * *")
+ 
+  @Scheduled(cron="0 46 12 * * *")
+  @Transactional
 	public Job job() {
 		
 	  batchProcessingService.batchProcessing();
-		Step step = stepBuilderFactory.get("step-load-data")
-				.<LibraryUser,LibraryUser> chunk(100)
-				.build();
-				;
-				
-	return jobBuilderFactory.get("ETL-Load")
-			.incrementer(new RunIdIncrementer())
-			.start(step)
-			.build();
+//		Step step = stepBuilderFactory.get("step-load-data")
+//				.<Borrow,Borrow> chunk(100)
+//				.reader(batchProcessingService.itemreader())
+//				.processor(batchProcessingService.itemProcessor())
+//				.writer(batchProcessingService.itemWriter()) 
+//				.build();
+//				;
+//				
+//	return jobBuilderFactory.get("ETL-Load")
+//			.incrementer(new RunIdIncrementer())
+//			.start(step)
+//			.build();
+	return null;
 		
 	}
 	

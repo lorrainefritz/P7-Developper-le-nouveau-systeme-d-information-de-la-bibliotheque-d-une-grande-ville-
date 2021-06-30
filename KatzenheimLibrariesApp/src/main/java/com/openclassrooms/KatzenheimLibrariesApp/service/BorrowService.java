@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import com.openclassrooms.KatzenheimLibrariesApp.controller.BooksListAndFormController;
 import com.openclassrooms.KatzenheimLibrariesApp.entities.Book;
 import com.openclassrooms.KatzenheimLibrariesApp.entities.Borrow;
+import com.openclassrooms.KatzenheimLibrariesApp.entities.LibraryUser;
+import com.openclassrooms.KatzenheimLibrariesApp.repository.BookRepository;
 import com.openclassrooms.KatzenheimLibrariesApp.repository.BorrowRepository;
 
 @Service
@@ -22,6 +24,9 @@ public class BorrowService {
 	
 	@Autowired
 	BorrowRepository borrowRepository;
+	@Autowired
+	BookService bookService;
+	
 	
 	public List<Borrow> getAllBorrows(){
 		logger.info("in BorrowService in getAllBorrows method");
@@ -40,19 +45,26 @@ public class BorrowService {
 	
 	public void deleteBorrow(Borrow borrow) {
 		logger.info("in BorrowService in deleteBorrow method");
+		bookService.giveBackABook(borrow.getBook());
+		borrow.setBook(null);
 		borrowRepository.delete(borrow);
 	}
 
-	public void makeABorrow(Borrow borrow, Book book) {
+	public void makeABorrow(LibraryUser libraryUser, Borrow borrow, Book book) {
+		logger.info("in BorrowService in makeABorrow method");
 		// la partie temporelle de l'emprunt
 		borrow.setStartDate(Date.from(Instant.now()));
 		borrow.setReturnDate(Date.from(Instant.now().plus(28, ChronoUnit.DAYS)));
+		//on set l'email de contact
+		borrow.setLibraryUserEmail(libraryUser.getEmail());
 		//on set le livre
 		borrow.setBook(book);
+		
 		saveBorrow(borrow);
 	}
 
 	public void extendBorrow(Borrow borrow) {
+		logger.info("in BorrowService in extendBorrow method");
 		Date returnDate = borrow.getReturnDate();
 		 Calendar cal = Calendar.getInstance();
 		 cal.setTime(returnDate);

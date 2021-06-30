@@ -87,7 +87,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 					"/ajouterDesLivres",
 					"/modifierUnLivre",
 					"/supprimerUnLivre",
-					"/ajouterUneImageDeCouvertureAuLivre"
+					"/ajouterUneImageDeCouvertureAuLivre",
+					"/userListForAdmin"
 						).hasRole("ADMIN")
 				
 //				.anyRequest().authenticated()

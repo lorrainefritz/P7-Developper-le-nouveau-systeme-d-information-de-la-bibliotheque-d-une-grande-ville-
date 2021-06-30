@@ -14,6 +14,7 @@ import com.openclassrooms.KatzenheimLibrariesApp.entities.Book;
 import com.openclassrooms.KatzenheimLibrariesApp.entities.Library;
 import com.openclassrooms.KatzenheimLibrariesApp.entities.Stock;
 import com.openclassrooms.KatzenheimLibrariesApp.repository.BookRepository;
+import com.openclassrooms.KatzenheimLibrariesApp.repository.StockRepository;
 
 @Service
 public class BookService {
@@ -21,6 +22,8 @@ public class BookService {
 	
 	@Autowired
 	BookRepository bookRepository;
+	@Autowired
+	StockService stockService;
 	
 	public List<Book> getAllBooks(){
 		logger.info("in BookService in getAllBooks method"); 
@@ -64,6 +67,15 @@ public class BookService {
 		book.setStock(null);
 		book.setLibrary(null);
 		bookRepository.delete(book);
+	}
+
+	public void giveBackABook(Book book) {
+		logger.info("in BookService in giveBackABook method");
+		Stock stock = book.getStock();
+		stock.setNumberOfCopiesOut(stock.getNumberOfCopiesOut()-1);
+		stock.setNumberOfCopiesAvailable(stock.getNumberOfCopiesAvailable()+1);
+		stockService.saveStock(stock);
+		saveBook(book);
 	}
 	
 	

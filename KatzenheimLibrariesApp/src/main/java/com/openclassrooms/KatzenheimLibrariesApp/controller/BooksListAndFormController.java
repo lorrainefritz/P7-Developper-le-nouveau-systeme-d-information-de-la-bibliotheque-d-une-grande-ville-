@@ -153,7 +153,7 @@ public class BooksListAndFormController {
 			// l'emprunt
 			Borrow borrow = new Borrow();
 			
-			borrowService.makeABorrow(borrow, book);
+			borrowService.makeABorrow(libraryUser,borrow, book);
 			libraryUserService.makeABorrow(libraryUser, borrow);
 		}
 

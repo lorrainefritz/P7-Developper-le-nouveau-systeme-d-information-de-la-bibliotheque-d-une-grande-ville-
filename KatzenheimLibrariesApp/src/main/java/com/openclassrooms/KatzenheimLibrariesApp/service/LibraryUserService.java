@@ -20,6 +20,7 @@ import com.openclassrooms.KatzenheimLibrariesApp.dto.LibraryUserRegistrationDto;
 import com.openclassrooms.KatzenheimLibrariesApp.entities.Borrow;
 import com.openclassrooms.KatzenheimLibrariesApp.entities.LibraryUser;
 import com.openclassrooms.KatzenheimLibrariesApp.entities.Role;
+import com.openclassrooms.KatzenheimLibrariesApp.repository.BorrowRepository;
 import com.openclassrooms.KatzenheimLibrariesApp.repository.LibraryUserRepository;
 import com.openclassrooms.KatzenheimLibrariesApp.repository.RoleRepository;
 
@@ -31,6 +32,9 @@ public class LibraryUserService implements LibraryUserDtoDS {
 	private LibraryUserRepository libraryUserRepository;
 	@Autowired
 	RoleService roleService;
+	@Autowired
+	BorrowService borrowService;
+	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
@@ -82,7 +86,14 @@ public class LibraryUserService implements LibraryUserDtoDS {
 
 	public void deleteLibraryUser(Integer id) {
 		logger.info("in LibraryUserService in deleteLibraryUser method");
-		libraryUserRepository.deleteById(id);
+		LibraryUser libraryUser = libraryUserRepository.getById(id);
+		libraryUser.setRoles(null);
+		List <Borrow> borrows = (List<Borrow>)libraryUser.getBorrows();
+		for (Borrow borrow : borrows) {
+			borrowService.deleteBorrow(borrow);	
+		}
+		saveLibraryUser(libraryUser);
+		libraryUserRepository.delete(libraryUser);;
 	}
 
 	public LibraryUser saveLibraryUser(LibraryUser libraryUser) {
