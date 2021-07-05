@@ -28,67 +28,19 @@ import com.openclassrooms.KatzenheimLibrariesApp.service.BorrowService;
 @EnableScheduling
 public class SpringBatchConfig {
 
-	@Autowired private JobBuilderFactory jobBuilderFactory;
-	@Autowired private StepBuilderFactory stepBuilderFactory;
-//	@Autowired private ItemReader <LibraryUser> itemReader;
-//	@Autowired private ItemWriter <LibraryUser> itemWriter;
-//	@Autowired private ItemProcessor<LibraryUser,LibraryUser> itemProcessor;
 	@Autowired BatchProcessingService batchProcessingService ;
 	
 	
  
-  @Scheduled(cron="0 46 12 * * *")
+  @Scheduled(cron="0 24 20 * * *")
   @Transactional
-	public Job job() {
-		
+	public Job job() {		
 	  batchProcessingService.batchProcessing();
-//		Step step = stepBuilderFactory.get("step-load-data")
-//				.<Borrow,Borrow> chunk(100)
-//				.reader(batchProcessingService.itemreader())
-//				.processor(batchProcessingService.itemProcessor())
-//				.writer(batchProcessingService.itemWriter()) 
-//				.build();
-//				;
-//				
-//	return jobBuilderFactory.get("ETL-Load")
-//			.incrementer(new RunIdIncrementer())
-//			.start(step)
-//			.build();
 	return null;
 		
 	}
 	
 }
 	
-	
-	
-	
-	
-	
-	
-
-//	@Autowired private JobBuilderFactory jobBuilderFactory;
-//	@Autowired private StepBuilderFactory stepBuilderFactory;
-//	@Autowired private ItemReader <LibraryUser> itemReader;
-//	@Autowired private ItemWriter <LibraryUser> itemWriter;
-//	@Autowired private ItemProcessor<LibraryUser,LibraryUser> itemProcessor;
-//	
-//	@Bean
-//	public Job job() {
-//		
-//		Step step = stepBuilderFactory.get("step-load-data")
-//				.<LibraryUser,LibraryUser> chunk(100)
-//				.reader(itemReader)
-//				.writer(itemWriter)
-//				.processor(itemProcessor)
-//				.build();
-//				;
-//				
-//	return jobBuilderFactory.get("ETL-Load")
-//			.incrementer(new RunIdIncrementer())
-//			.start(step)
-//			.build();
-//		
-//	}
 	
 

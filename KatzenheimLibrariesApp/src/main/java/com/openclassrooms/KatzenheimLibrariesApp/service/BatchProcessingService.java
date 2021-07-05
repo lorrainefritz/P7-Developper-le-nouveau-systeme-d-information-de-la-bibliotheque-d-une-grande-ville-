@@ -46,8 +46,7 @@ public class BatchProcessingService {
 	LibraryUserService libraryUserService;
 	@Autowired
 	BorrowService borrowService;
-//	@Autowired
-//	private JavaMailSender javaMailSender;
+
 	private final Logger logger = LoggerFactory.getLogger(BatchProcessingService.class);
 
 	public void batchProcessing() {
@@ -64,7 +63,6 @@ public class BatchProcessingService {
 				Book book = borrow.getBook();
 				Library library = book.getLibrary();
 				LibraryUser libraryUser = libraryUserService.findLibraryUserByEmail(borrow.getLibraryUserEmail());
-				String userEmail =libraryUser.getEmail();
 				logger.info("in BatchProcessingService in batchProcessing method in isOutdated from user " + libraryUser.getEmail());
 				try {
 					sendmail(libraryUser,library,book);
@@ -102,20 +100,18 @@ public class BatchProcessingService {
 		      }
 		   });
 		   String emailBody = "Bonjour " + libraryUser.getFirstName() + " " + libraryUser.getLastName() + ","
-					+ "\nLe livre " + book.getTitle()
-					+ " est à rendre au plus vitre car sa date de retour est dépassée. \n Merci de le rendre au plus vite à la bibliothèque de "
-					+ library.getName() + "\nCordialement. \nLes Bibliothèques de Katzenheim";
+					+ "\nLe livre " +  book.getTitle()
+					+ " est à rendre au plus vitre car sa date de retour est dépassée. \nMerci de le rendre au plus vite à la bibliothèque de "
+					+ library.getName() +"\nLes horaires d'ouverture sont : " +library.getOpeningTime()+"\nCordialement. \nLes Bibliothèques de Katzenheim";
 		   Message msg = new MimeMessage(session);
 		   msg.setFrom(new InternetAddress("aehlinepomme@gmail.com", false));
 
 		   msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(libraryUser.getEmail()));
 		   msg.setSubject("Date de retour dépassée");
 		   msg.setText(emailBody);
-//		   msg.setContent("Tutorials point email", "text/html");
 		   msg.setSentDate(new Date());
 
 		   MimeBodyPart messageBodyPart = new MimeBodyPart();
-//		   messageBodyPart.setContent("Tutorials point email", "text/html");
 		   messageBodyPart.setContent(emailBody, toString());
 		   Transport.send(msg);   
 		}	

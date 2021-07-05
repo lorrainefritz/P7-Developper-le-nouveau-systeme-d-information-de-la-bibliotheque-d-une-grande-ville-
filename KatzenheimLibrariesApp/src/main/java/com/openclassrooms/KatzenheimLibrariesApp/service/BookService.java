@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.openclassrooms.KatzenheimLibrariesApp.entities.Book;
@@ -30,11 +31,7 @@ public class BookService {
 		return bookRepository.findAll();
 	}
 	
-	public List<Book> getBooksByKeyword(String keyword){
-		logger.info("in BookService in getBooksByKeyword method");
-		return bookRepository.findByKeyword(keyword);
-	}
-	
+		
 	public Book getOneBookById(Integer id) {
 		logger.info("in BookService in getOneBookById method");
 		return bookRepository.getById(id);
@@ -45,6 +42,7 @@ public class BookService {
 		logger.info("in BookService in getOneBookByTitle method");
 		return  bookRepository.findByTitle(title);
 	}
+	
 	
 	public Book saveBook(Book book) {
 		logger.info("in BookService in addBook method");

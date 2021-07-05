@@ -52,7 +52,7 @@
 							type="text" class="form_label" id="emailLibrary"
 							name="email" placeholder="Obligatoire">
 						<div class="element_danger">
-							<div id="emailLibrary"></div>
+							<div id="errorEmailLibrary"></div>
 							<div th:if="${#fields.hasErrors('email')}"
 								th:errors="*{email}"></div>
 						</div>
@@ -63,7 +63,7 @@
 							th:field="*{phone}" type="text" class="form_label"
 							id="phoneLibrary" name="phone" placeholder="Obligatoire">
 						<div class="element_danger">
-							<div id="phoneLibrary"></div>
+							<div id="errorPhoneLibrary"></div>
 							<div th:if="${#fields.hasErrors('phone')}"
 								th:errors="*{phone}"></div>
 						</div>
@@ -74,7 +74,7 @@
 							th:field="*{openingTime}" type="text" class="form_label"
 							id="openingTimeLibrary" name="openingTime" placeholder="Obligatoire">
 						<div class="element_danger">
-							<div id="openingTimeLibrary"></div>
+							<div id="errorOpeningTimeLibrary"></div>
 							<div th:if="${#fields.hasErrors('openingTime')}"
 								th:errors="*{openingTime}"></div>
 						</div>

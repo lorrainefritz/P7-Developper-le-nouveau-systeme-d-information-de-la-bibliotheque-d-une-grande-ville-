@@ -35,20 +35,19 @@
 			</div>
 			
 			<div class="col-md-6 form-group">
-				<button type="submit" class="btn btn-primary">EDITER </button>
+				<button type="submit" class="btn btn-primary">SAUVEGARDER </button>
 			</div>
 		</form>
 		<form th:action="@{/modifierMonMotDePasse}" method="post"
 			th:object="${currentLibraryUser}">
 
 			<div class="col-md-6 form-group">
-				<label for="password">PASSWORD</label> <input type="text"
-					th:field="*{password}" id="password" class="form-control"
-					placeholder="${currentLibraryUser.password}">
+				<label for="password">MOT DE PASSE</label> <input type="password" 
+					th:field="*{password}" id="password" class="form-control">
 			</div>
 			<div class="col-md-6 form-group">
-				<button type="submit" class="btn btn-primary">EDITER
-					PASSWORD</button>
+				<button type="submit" class="btn btn-primary">SAUVEGARDER
+					MOT DE PASSE</button>
 			</div>
 		</form>
 
@@ -63,43 +62,12 @@
 			<div class="col-md-6 form-group">
 				<button
 					onclick="return confirm('attention vous allez être déconnecté. Etes vous sur de vouloir procéder?')"
-					type="submit" class="btn btn-primary">EDITER
+					type="submit" class="btn btn-primary">SAUVEGARDER
 					EMAIL</button>
 			</div>
 
 		</form>
-		<!-- <div class="col-md-6 form-group" sec:authorize="hasRole('ADMIN')">
-			<form th:action="@{/editRoles}" method="post" th:object="${roles}">
-				<table class="table">
-					<thead class="table top">
-						<tr>
-							<th>ID</th>
-							<th>ROLE</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="role,custStat:${roles}">
-							<td th:text="${custStat.index}"></td>
-							<td th:text="${role.id}"></td>
-							<td th:text="${role.name}"></td>
-							 <td><a th:href="@{deleteUserRole(id=${custStat.index})}">Supprimer</a></td> 
-						</tr>
-					</tbody>
-				</table>
-			</form>
-			 <div sec:authorize="hasRole('ADMIN')">
-				<form th:action="@{/addUserRole}" method="post" th:object="${roles}">
-					<select th:field="*{role}">
-						<option th:each="globRole:${globalsRolesList}" th:value="${globRole.id}"
-							th:text="${globRole.name}"></option>
-					</select>
-					<div>
-						<button type="submit" class="btn btn-primary">AJOUTER
-							ROLE</button>
-					</div>
-				</form>
-			</div> 
-		</div> -->
+		
 		<footer>
 			<div th:insert="footer.html"></div>
 		</footer>

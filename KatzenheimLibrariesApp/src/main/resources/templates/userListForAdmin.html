@@ -35,7 +35,6 @@
 						<td th:text="${libraryUser.address}"></td>
 						<td th:text="${libraryUser.phone}"></td>
 						<td th:text="${libraryUser.email}"></td>
-						<!-- <td th:text="${libraryUser.authorities}"></td> -->
 						<td th:each ="role:${libraryUser.roles}">
 						<ul th:text="${role.name}"></ul> 
 						</td>

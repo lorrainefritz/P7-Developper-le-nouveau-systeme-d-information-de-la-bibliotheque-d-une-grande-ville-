@@ -27,14 +27,14 @@
 				<div th:text="${library.openingTime}">TELEPHONE</div>
 
 			</div>
-			<!-- A rajouter sec:authorize="hasAnyRole('ADMIN')" -->
-			<div>
+			
+			<div sec:authorize="hasAnyRole('ADMIN')">
 				<a class="btn btn-warning btn-lg"
 					th:href="@{modifierUneBibliotheque(id=${library.id})}">
 					Modifier</a>
 			</div>
-			<!-- A rajouter sec:authorize="hasAnyRole('ADMIN')" -->
-			<div>
+			
+			<div sec:authorize="hasAnyRole('ADMIN')">
 				<a class="btn btn-dark btn-lg" id="buttonSuppressionLibrary"
 					th:href="@{supprimerUneBibliotheque(id=${library.id})}"
 					onclick="return confirm('êtes vous sur de vouloir supprimer?')">Supprimer</a>

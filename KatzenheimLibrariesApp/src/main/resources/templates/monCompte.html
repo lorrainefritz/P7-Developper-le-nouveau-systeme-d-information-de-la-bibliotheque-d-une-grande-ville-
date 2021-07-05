@@ -53,7 +53,7 @@
 				
 				<div id="OneBorrowMonCompte" th:each="borrow,custStat:${borrows}">
 
-					<div class="float-right" th:if="${borrow.IsOutdated == true}">
+					<div class="float-right" th:if="${borrow.isIsOutdated == true}">
 						<a> <img class="img-fluid" alt="borrow is Outdate"
 							src="/imagesAndLogos/logos/borrowIsOutdated.png">
 						</a>
@@ -61,11 +61,6 @@
 					<div class="float-right" th:if="${borrow.alreadyExtended == true}">
 						<a> <img class="img-fluid" alt="borrow is Already extended"
 							src="/imagesAndLogos/logos/borrowAlreadyExtended.png">
-						</a>
-					</div>
-					<div class="float-right" th:if="${borrow.alreadyExtended == true}">
-						<a> <img class="img-fluid" alt="borrow is Outdate"
-							src="/imagesAndLogos/logos/borrowIsOutdated.png">
 						</a>
 					</div>
 					

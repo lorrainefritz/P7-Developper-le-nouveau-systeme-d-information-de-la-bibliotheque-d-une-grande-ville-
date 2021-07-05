@@ -115,18 +115,20 @@ public class BooksListAndFormController {
 	}
 	
 	//On a laissé keyword des fois que besoin de faire une recherche multicritères
+	@Transactional
 	@GetMapping("/listeDesLivres")
 	public String getBooksList(Model model, @Param("keyword")String keyword) {
 		logger.info("HTTP GET request received at /listeDesLivres");
 		if(keyword!=null) {
-		model.addAttribute("books", bookService.getBooksByKeyword(keyword));
+			logger.info("HTTP GET request received at /listeDesLivres in keyword = "+ keyword);	
+		model.addAttribute("books", bookService.getOneBookByTitle(keyword));
 		model.addAttribute("keyword", keyword);
-		return "redirect:/listeDesLivres";
+		return "listeDesLivres";
 		}
 		else {
 			model.addAttribute("books", bookService.getAllBooks());
 		}
-		return "/listeDesLivres";	
+		return "listeDesLivres";	
 	}
 	
 	@GetMapping(path="/emprunterUnLivre")
