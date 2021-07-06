@@ -49,7 +49,7 @@
 			
 
 			<div class="col-md-6 form-group">
-				<button type="submit" class="btn btn-primary">EDITER</button>
+				<button type="submit" class="btn btn-primary">SAUVEGARDER</button>
 			</div>
 		</form>
 		<form th:action="@{/editUserPasswordWhenAdmin}" method="post"
@@ -74,12 +74,11 @@
 			</div>
 			
 			<div class="col-md-6 form-group">
-				<label for="password">PASSWORD</label> <input type="text"
-					th:field="*{password}" id="password" class="form-control"
-					placeholder="${libraryUser.password}">
+				<label for="password">PASSWORD</label> <input type="password"
+					th:field="*{password}" id="password" class="form-control">
 			</div>
 			<div class="col-md-6 form-group">
-				<button type="submit" class="btn btn-primary">EDITER
+				<button type="submit" class="btn btn-primary">SAUVEGARDER
 					PASSWORD</button>
 			</div>
 		</form>
@@ -116,7 +115,7 @@
 			<div class="col-md-6 form-group">
 				<button
 					onclick="return confirm('attention vous allez être déconnecté. Etes vous sur de vouloir procéder?')"
-					type="submit" class="btn btn-primary">EDITER EMAIL</button>
+					type="submit" class="btn btn-primary">SAUVEGARDER EMAIL</button>
 			</div>
 
 		</form>

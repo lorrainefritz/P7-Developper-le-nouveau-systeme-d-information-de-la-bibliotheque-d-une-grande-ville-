@@ -32,7 +32,7 @@ public class SpringBatchConfig {
 	
 	
  
-  @Scheduled(cron="0 24 20 * * *")
+  @Scheduled(cron="0 10 10 * * *")
   @Transactional
 	public Job job() {		
 	  batchProcessingService.batchProcessing();
