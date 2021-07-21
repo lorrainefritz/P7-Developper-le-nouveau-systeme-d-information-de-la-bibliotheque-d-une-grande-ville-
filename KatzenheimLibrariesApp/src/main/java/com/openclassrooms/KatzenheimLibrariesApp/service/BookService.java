@@ -43,6 +43,12 @@ public class BookService {
 		return  bookRepository.findByTitle(title);
 	}
 	
+	public List <Book> getBooksByTitle (String title){
+		logger.info("in BookService in getBooksByTitle method");
+		return bookRepository.findByTitleContaining(title);
+	}
+	
+	
 	
 	public Book saveBook(Book book) {
 		logger.info("in BookService in addBook method");

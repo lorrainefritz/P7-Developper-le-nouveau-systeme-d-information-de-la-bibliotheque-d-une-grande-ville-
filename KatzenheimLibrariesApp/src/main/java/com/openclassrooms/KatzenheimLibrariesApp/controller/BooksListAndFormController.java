@@ -16,10 +16,12 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.openclassrooms.KatzenheimLibrariesApp.entities.Book;
@@ -117,11 +119,12 @@ public class BooksListAndFormController {
 	//On a laissé keyword des fois que besoin de faire une recherche multicritères
 	@Transactional
 	@GetMapping("/listeDesLivres")
+	
 	public String getBooksList(Model model, @Param("keyword")String keyword) {
 		logger.info("HTTP GET request received at /listeDesLivres");
 		if(keyword!=null) {
 			logger.info("HTTP GET request received at /listeDesLivres in keyword = "+ keyword);	
-		model.addAttribute("books", bookService.getOneBookByTitle(keyword));
+		model.addAttribute("books", bookService.getBooksByTitle(keyword));
 		model.addAttribute("keyword", keyword);
 		return "listeDesLivres";
 		}
@@ -164,9 +167,6 @@ public class BooksListAndFormController {
 	}
 	
 	
-	
-	
-	
 	// Attention au modelMap
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping(path="/modifierUnLivre") 
@@ -179,8 +179,10 @@ public class BooksListAndFormController {
 		modelMap.addAttribute("libraries", libraryService.getAllLibraries());
 		return "/ajouterDesLivres";
 	}
+	
+	//devrait être  @DeleteMapping
 	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping("/supprimerUnLivre")
+	@DeleteMapping("/supprimerUnLivre")
 	public String deleteABook(Integer id) {
 		logger.info("HTTP GET request received at /supprimerUnLivre");
 		Book book = bookService.getOneBookById(id);
