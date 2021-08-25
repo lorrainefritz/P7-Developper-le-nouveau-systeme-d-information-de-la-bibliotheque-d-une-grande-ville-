@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.openclassrooms.KatzenheimLibrariesApp.entities.LibraryUser;
 import com.openclassrooms.KatzenheimLibrariesApp.entities.Role;
@@ -28,15 +32,18 @@ public class UserEditAdminController {
 	RoleService roleService;
 	@Autowired
 	LibraryUserService libraryUserService;
-
+	
 	private final Logger logger = LoggerFactory.getLogger(UserEditAdminController.class);
-
+	private ModelAndView mav;
+	
 	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping("/userListForAdmin")
-	public String showUserListForAdmin(Model model) {
+	@RequestMapping(value ="/userListForAdmin",method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView showUserListForAdmin(Model model) {
 		logger.info("HTTP GET request received at /userListForAdmin");
 		model.addAttribute("libraryUsers", libraryUserService.getAllLibraryUsers());
-		return "userListForAdmin";
+		mav = new ModelAndView("userListForAdmin");
+		return mav; 
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")

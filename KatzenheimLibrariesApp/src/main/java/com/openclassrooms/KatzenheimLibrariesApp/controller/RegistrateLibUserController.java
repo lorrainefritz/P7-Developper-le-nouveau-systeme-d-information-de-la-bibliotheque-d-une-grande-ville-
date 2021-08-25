@@ -37,7 +37,7 @@ public class RegistrateLibUserController {
 	public LibraryUserRegistrationDto libraryUserRegistrationDto() {
 		return new LibraryUserRegistrationDto();
 	}
-
+ 
 	@GetMapping
 	public String showRegistrationForm (){
 		logger.info("HTTP GET request received at /sInscrire in showRegistrationOrIdentificationForm");

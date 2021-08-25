@@ -10,7 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.openclassrooms.KatzenheimLibrariesApp.entities.Borrow;
 import com.openclassrooms.KatzenheimLibrariesApp.entities.LibraryUser;
@@ -26,6 +30,7 @@ public class IdentificateAccountController {
 	private final Logger logger = LoggerFactory.getLogger(BooksListAndFormController.class);
 	private UserDetails userDetails;
 	private LibraryUser currentLibraryUser;
+	private ModelAndView mav;
 	
 	private void libraryUserAuthentication(Authentication authentication) {
 		userDetails = (UserDetails) authentication.getPrincipal();
@@ -34,66 +39,78 @@ public class IdentificateAccountController {
 		logger.info("currentLibraryUser"+ currentLibraryUser.getFirstName());
 	}
 	
-	
-	@GetMapping("/identification")
-	public String showLoginForm() {
+	@RequestMapping(value ="/identification",method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView showLoginForm() {
 		logger.info("HTTP GET request received at /identification in showLoginForm");
-		return "identification";
+		mav = new ModelAndView("identification");
+		return mav;
 	} 
 	
-	@GetMapping("/monCompte")
-	public String showLibraryUserInfos (Authentication authentication, ModelMap modelMap) {
+	@RequestMapping(value ="/monCompte",method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView showLibraryUserInfos (Authentication authentication, ModelMap modelMap) {
 		logger.info("HTTP GET request received at /monCompte in showLibraryUserInfos");
 		libraryUserAuthentication(authentication);
 		modelMap.addAttribute("userDetails", userDetails);
 		modelMap.addAttribute("currentLibraryUser", currentLibraryUser);
 		modelMap.addAttribute("borrows", currentLibraryUser.getBorrows());
-		return "monCompte";
+		mav = new ModelAndView("monCompte");
+		return mav;
+		
 	}
-	
-	@GetMapping("/modifierMonCompte")
-	public String editLibraryUserInfos(Model model) {
+	@RequestMapping(value ="/modifierMonCompte",method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView editLibraryUserInfos(Model model) {
 		logger.info("HTTP GET request received at /monCompte in editLibraryUserInfos");
 		model.addAttribute("userDetails", userDetails);
 		model.addAttribute("currentLibraryUser", currentLibraryUser);
-		return "modifierMonCompte";
+		mav = new ModelAndView("modifierMonCompte");
+		return mav;
 	}
 
-	//Rajouter binding
-	@PostMapping("/modifierMonCompteInfosPerso")
-	public String editLibraryUserInfos(String firstName, String lastName, String address, String phone) {
+	
+	@RequestMapping(value ="/modifierMonCompteInfosPerso",method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView editLibraryUserInfos(String firstName, String lastName, String address, String phone) {
 		logger.info("HTTP POST request received at /monCompte in editLibraryUserInfos");
 		libraryUserService.libraryUserInfosModification(currentLibraryUser,firstName,lastName,address,phone);
-		return "redirect:/monCompte";
-		
+		mav = new ModelAndView("redirect:/monCompte");
+		return mav;
 	}
-	//Rajouter binding
-	@PostMapping("/modifierMonMotDePasse")
-	public String editLibraryUserPassword(String password) {
+	
+	@RequestMapping(value ="/modifierMonMotDePasse",method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView editLibraryUserPassword(String password) {
 		logger.info("HTTP POST request received at /monCompte in editLibraryUserInfos");
 		libraryUserService.libraryUserPasswordModification(currentLibraryUser, password);
-		return "redirect:/monCompte";
+		mav = new ModelAndView("redirect:/monCompte");
+		return mav;
 	}
-	//Rajouter binding
-	@PostMapping("/modifierMonAdresseEmail")
-public String editLibraryUserEmail(Authentication authentication,String email) {
+	
+	@RequestMapping(value ="/modifierMonAdresseEmail",method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView editLibraryUserEmail(Authentication authentication,String email) {
 		logger.info("HTTP POST request received at /monCompte in editLibraryUserInfos");
 		libraryUserAuthentication(authentication);
 		libraryUserService.libraryUserEmailModification(currentLibraryUser, email);
-		return "redirect:/logout";
+		mav = new ModelAndView("redirect:/logout");
+		return mav;
 	}
 	
-	
-	@GetMapping(path="/prolongerUnLivre")
-	public String extendABorrow(Integer id) {
+	@RequestMapping(value ="/prolongerUnLivre",method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView extendABorrow(Integer id) {
 		logger.info("HTTP GET request received at /monCompte in extendABorrow");
 		Borrow borrow = borrowService.findOneBorrowById(id);
 		if(borrow.isAlreadyExtended()==true){
-			return "redirect:/monCompte";
+			mav = new ModelAndView("redirect:/monCompte");
+			return mav;
 		} else {
 		borrowService.extendBorrow(borrow);	
 		}
-		return "redirect:/monCompte";
+		mav = new ModelAndView("redirect:/monCompte");
+		return mav;
 	}
 	
 }
